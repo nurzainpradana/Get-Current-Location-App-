@@ -10,17 +10,18 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -30,8 +31,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-    TextView txt_lat, txt_long,address;
-    Button btn_share,btn_store,btn_show;
+    TextView txt_lat, txt_long, address;
+    Button btn_share, btn_store, btn_show;
     DatabaseHelper mydb;
     protected LocationManager locationManager;
 
@@ -41,13 +42,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mydb=new DatabaseHelper(this);
-        address=findViewById(R.id.address);
+        mydb = new DatabaseHelper(this);
+        address = findViewById(R.id.address);
         txt_lat = findViewById(R.id.txt_lat);
         txt_long = findViewById(R.id.txt_long);
         btn_share = findViewById(R.id.btn_share);
-        btn_store=findViewById(R.id.btn_store);
-        btn_show=findViewById(R.id.btn_show);
+        btn_store = findViewById(R.id.btn_store);
+        btn_show = findViewById(R.id.btn_show);
 
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 @Override
                 public void onPermissionGranted() {
                     Toast.makeText(getApplicationContext(),"Permission granted",Toast.LENGTH_SHORT).show();
-
                 }
 
                 @Override
@@ -90,6 +90,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 showMessage("Location Data",stringBuffer.toString());
             }
         });
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     }
 
